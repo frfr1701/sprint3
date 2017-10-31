@@ -70,8 +70,8 @@ class Panels {
     }
 
     void ifSwitch(ActionEvent ae) {
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < buttons.length; i++) {
+            for (int j = 0; j < buttons[0].length; j++) {
                 if (ae.getSource() == buttons[i][j]) {
                     if (((i - 1 == emptyslot[0] || i + 1 == emptyslot[0]) && j == emptyslot[1]) || ((j - 1 == emptyslot[1] || j + 1 == emptyslot[1]) && i == emptyslot[0])) {
                         movesound();
