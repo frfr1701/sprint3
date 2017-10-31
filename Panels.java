@@ -6,32 +6,25 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 class Panels {
 
-    private final File winsoundPath = new File("src\\sprint3\\winsound.wav");
-    private final File movesoundPath = new File("src\\sprint3\\movesound.wav");
     private final Dimension gamesize = new Dimension(400, 400);
     private final Dimension menusize = new Dimension(400, 50);
     private final Dimension resultsize = new Dimension(400, 50);
-    Dimension windowSize = new Dimension(400, 540);
-    Dimension location = new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (windowSize.width / 2), (Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (windowSize.height / 2));
-    JButton[][] buttons = new JButton[4][4];
-    JPanel game = new JPanel();
-    JPanel menu = new JPanel();
-    int[] emptyslot = {3, 3};
-    JButton newGame = new JButton("Nytt Spel");
-    JButton cancel = new JButton("Avbryt");
-    JLabel result = new JLabel("", JLabel.CENTER);
+    private final JPanel game = new JPanel();
+    private final JPanel menu = new JPanel();
+    private final JLabel result = new JLabel("", JLabel.CENTER);
+    private final JButton newGame = new JButton("Nytt Spel");
+    private final JButton cancel = new JButton("Avbryt");
+    private final Dimension windowSize = new Dimension(400, 540);
+    private final Dimension location = new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (windowSize.width / 2), (Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (windowSize.height / 2));
+    private JButton[][] buttons = new JButton[4][4];
+    private int[] emptyslot = {3, 3};
+    Sound make = new Sound();
 
     public Panels() {
         int count = 1;
@@ -74,7 +67,7 @@ class Panels {
             for (int j = 0; j < buttons[0].length; j++) {
                 if (ae.getSource() == buttons[i][j]) {
                     if (((i - 1 == emptyslot[0] || i + 1 == emptyslot[0]) && j == emptyslot[1]) || ((j - 1 == emptyslot[1] || j + 1 == emptyslot[1]) && i == emptyslot[0])) {
-                        movesound();
+                        make.movesound();
                         String temp = buttons[i][j].getText();
                         buttons[i][j].setText(buttons[emptyslot[0]][emptyslot[1]].getText());
                         buttons[i][j].setBackground(Color.WHITE);
@@ -96,36 +89,84 @@ class Panels {
                 && buttons[3][0].getText().equalsIgnoreCase("13") && buttons[3][1].getText().equalsIgnoreCase("14") && buttons[3][2].getText().equalsIgnoreCase("15");
 
     }
-    
-    private void movesound() {
-        if (movesoundPath.exists()) {
-            try {
-                Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(movesoundPath));
-                clip.start();
-            } catch (LineUnavailableException e) {
-                System.out.println("null!");
-            } catch (IOException e) {
-                System.out.println("filen hittas inte!");
-            } catch (UnsupportedAudioFileException e) {
-                System.out.println("filen stöds inte!");
-            }
-        }
+
+    void changeResultText(String message) {
+        result.setText(message);
     }
 
-    void winsound() {
-        if (winsoundPath.exists()) {
-            try {
-                Clip clip = AudioSystem.getClip();
-                clip.open(AudioSystem.getAudioInputStream(winsoundPath));
-                clip.start();
-            } catch (LineUnavailableException e) {
-                System.out.println("null!");
-            } catch (IOException e) {
-                System.out.println("filen hittas inte!");
-            } catch (UnsupportedAudioFileException e) {
-                System.out.println("filen stöds inte!");
-            }
-        }
+    void changeBlankRow(int change) {
+        String tempS = buttons[emptyslot[0]][emptyslot[1]].getText();
+        Color tempC = buttons[emptyslot[0]][emptyslot[1]].getBackground();
+        buttons[emptyslot[0]][emptyslot[1]].setText(buttons[emptyslot[0] + change][emptyslot[1]].getText());
+        buttons[emptyslot[0]][emptyslot[1]].setBackground(buttons[emptyslot[0] + change][emptyslot[1]].getBackground());
+        buttons[emptyslot[0] + change][emptyslot[1]].setText(tempS);
+        buttons[emptyslot[0] + change][emptyslot[1]].setBackground(tempC);
+        emptyslot[0] += change;
+    }
+
+    void changeBlankColumn(int change) {
+        String tempS = buttons[emptyslot[0]][emptyslot[1]].getText();
+        Color tempC = buttons[emptyslot[0]][emptyslot[1]].getBackground();
+        buttons[emptyslot[0]][emptyslot[1]].setText(buttons[emptyslot[0]][emptyslot[1] + change].getText());
+        buttons[emptyslot[0]][emptyslot[1]].setBackground(buttons[emptyslot[0]][emptyslot[1] + change].getBackground());
+        buttons[emptyslot[0]][emptyslot[1] + change].setText(tempS);
+        buttons[emptyslot[0]][emptyslot[1] + change].setBackground(tempC);
+        emptyslot[1] += change;
+    }
+
+    JButton getButton(int i, int j) {
+        return buttons[i][j];
+    }
+
+    JButton[][] getButtons() {
+        return buttons;
+    }
+
+    int[] getEmptySlot() {
+        return emptyslot;
+    }
+
+    int getRowLength() {
+        return buttons.length;
+    }
+
+    int getColumnLength() {
+        return buttons[0].length;
+    }
+
+    JPanel getGame() {
+        return game;
+    }
+
+    JPanel getMenu() {
+        return menu;
+    }
+
+    JLabel getResult() {
+        return result;
+    }
+
+    JButton getNewGame() {
+        return newGame;
+    }
+
+    JButton getCancel() {
+        return cancel;
+    }
+
+    Dimension getWindowSize() {
+        return windowSize;
+    }
+
+    int getLocationWidth() {
+        return location.width;
+    }
+
+    int getLocationHeight() {
+        return location.height;
+    }
+
+    void makeWinSound() {
+        make.winsound();
     }
 }
