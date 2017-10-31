@@ -12,7 +12,6 @@ public class Sprint3 extends JFrame {
     boolean active = true;
 
     Sprint3() {
-        panels = Shuffle.make(panels);
 
         class MyListener implements ActionListener {
 
@@ -21,7 +20,6 @@ public class Sprint3 extends JFrame {
                 if (active) {
                     panels.ifSwitch(ae);
                     if (panels.win()) {
-                        panels.winsound();
                         panels.result.setText("Grattis, du vann!");
                         active = false;
                     }
@@ -29,7 +27,6 @@ public class Sprint3 extends JFrame {
                 if (ae.getSource() == panels.newGame) {
                     panels.result.setText("");
                     active = true;
-                    panels = Shuffle.make(panels);
                 }
                 if (ae.getSource() == panels.cancel) {
                     System.exit(0);
