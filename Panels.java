@@ -22,7 +22,7 @@ class Panels {
     private final JButton cancel = new JButton("Avbryt");
     private final Dimension windowSize = new Dimension(400, 540);
     private final Dimension location = new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (windowSize.width / 2), (Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (windowSize.height / 2));
-    private JButton[][] buttons = new JButton[4][4];
+    private final JButton[][] buttons = new JButton[4][4];
     private int[] emptyslot = {3, 3};
     Sound make = new Sound();
 
