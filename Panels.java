@@ -24,7 +24,7 @@ class Panels {
     private final Dimension location = new Dimension((Toolkit.getDefaultToolkit().getScreenSize().width / 2) - (windowSize.width / 2), (Toolkit.getDefaultToolkit().getScreenSize().height / 2) - (windowSize.height / 2));
     private final JButton[][] buttons = new JButton[4][4];
     private final int[] emptyslot = {3, 3};
-    Sound make = new Sound();
+    private final Sound make = new Sound();
 
     public Panels() {
         int count = 1;
