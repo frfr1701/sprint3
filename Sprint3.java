@@ -7,9 +7,9 @@ import javax.swing.JFrame;
 
 public class Sprint3 extends JFrame {
 
-    Panels panels = new Panels();
-    Shuffle shuffle = new Shuffle();
-    boolean active = true;
+    private Panels panels = new Panels();
+    private Shuffle shuffle = new Shuffle();
+    private boolean active = true;
 
     Sprint3() {
         panels = shuffle.make(panels);
