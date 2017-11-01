@@ -8,10 +8,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 class Sound {
-    
+
     private final File winsoundPath = new File("src\\sprint3\\winsound.wav");
     private final File movesoundPath = new File("src\\sprint3\\movesound.wav");
-    
+
     void movesound() {
         if (movesoundPath.exists()) {
             try {

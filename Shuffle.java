@@ -5,9 +5,9 @@ import java.util.Random;
 class Shuffle {
 
     Panels make(Panels panels) {
+        Random random = new Random();
         for (int changes = 100000; changes > 0; changes--) {
             boolean done = false;
-            Random random = new Random();
             while (!done) {
                 int randomdirection = random.nextInt(4) + 1;
                 switch (randomdirection) {

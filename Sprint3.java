@@ -33,7 +33,7 @@ public class Sprint3 extends JFrame {
                 }
                 if (ae.getSource() == panels.getCancel()) {
                     System.exit(0);
-                }   
+                }
             }
         }
         MyListener listen = new MyListener();
