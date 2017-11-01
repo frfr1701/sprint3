@@ -64,17 +64,22 @@ final class Panels {
                 if (ae.getSource() == buttons[i][j]) {
                     if (((i - 1 == emptyslot[0] || i + 1 == emptyslot[0]) && j == emptyslot[1]) || ((j - 1 == emptyslot[1] || j + 1 == emptyslot[1]) && i == emptyslot[0])) {
                         make.movesound();
-                        String temp = buttons[i][j].getText();
-                        buttons[i][j].setText(buttons[emptyslot[0]][emptyslot[1]].getText());
-                        buttons[i][j].setBackground(Color.WHITE);
-                        buttons[emptyslot[0]][emptyslot[1]].setText(temp);
-                        buttons[emptyslot[0]][emptyslot[1]].setBackground(Color.BLACK);
-                        emptyslot[0] = i;
-                        emptyslot[1] = j;
+                        swapButtons(i, j);
                     }
                 }
             }
         }
+    }
+
+    void swapButtons(int i, int j) {
+        make.movesound();
+        String temp = buttons[i][j].getText();
+        buttons[i][j].setText(buttons[emptyslot[0]][emptyslot[1]].getText());
+        buttons[i][j].setBackground(Color.WHITE);
+        buttons[emptyslot[0]][emptyslot[1]].setText(temp);
+        buttons[emptyslot[0]][emptyslot[1]].setBackground(Color.BLACK);
+        emptyslot[0] = i;
+        emptyslot[1] = j;
     }
 
     boolean win() {
