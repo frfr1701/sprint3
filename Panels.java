@@ -72,7 +72,6 @@ final class Panels {
     }
 
     void swapButtons(int i, int j) {
-        make.movesound();
         String temp = buttons[i][j].getText();
         buttons[i][j].setText(buttons[emptyslot[0]][emptyslot[1]].getText());
         buttons[i][j].setBackground(Color.WHITE);
