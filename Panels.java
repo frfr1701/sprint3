@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-class Panels {
+final class Panels {
 
     private final Dimension gamesize = new Dimension(400, 400);
     private final Dimension menusize = new Dimension(400, 50);
@@ -28,8 +28,8 @@ class Panels {
 
     public Panels() {
         int count = 1;
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons[0].length; j++) {
+        for (int i = 0; i < getRowLength(); i++) {
+            for (int j = 0; j < getColumnLength(); j++) {
                 if (i == 3 && j == 3) {
                     buttons[i][j] = new JButton("    ");
                     buttons[i][j].setBackground(Color.WHITE);
@@ -41,6 +41,7 @@ class Panels {
                 }
                 buttons[i][j].setForeground(Color.WHITE);
                 buttons[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                game.add(buttons[i][j]);
             }
         }
         newGame.setBackground(Color.BLACK);
@@ -48,11 +49,6 @@ class Panels {
         cancel.setBackground(Color.BLACK);
         cancel.setForeground(Color.WHITE);
         game.setLayout(new GridLayout(4, 4));
-        for (JButton[] button : buttons) {
-            for (int i = 0; i < buttons[0].length; i++) {
-                game.add(button[i]);
-            }
-        }
         menu.setLayout(new GridLayout(1, 2));
         menu.add(newGame);
         menu.add(cancel);
@@ -63,8 +59,8 @@ class Panels {
     }
 
     void ifSwitch(ActionEvent ae) {
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons[0].length; j++) {
+        for (int i = 0; i < getRowLength(); i++) {
+            for (int j = 0; j < getColumnLength(); j++) {
                 if (ae.getSource() == buttons[i][j]) {
                     if (((i - 1 == emptyslot[0] || i + 1 == emptyslot[0]) && j == emptyslot[1]) || ((j - 1 == emptyslot[1] || j + 1 == emptyslot[1]) && i == emptyslot[0])) {
                         make.movesound();
@@ -116,10 +112,6 @@ class Panels {
 
     JButton getButton(int i, int j) {
         return buttons[i][j];
-    }
-
-    JButton[][] getButtons() {
-        return buttons;
     }
 
     int[] getEmptySlot() {
