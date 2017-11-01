@@ -26,7 +26,7 @@ final class Panels {
     private final int[] emptyslot = {3, 3};
     private final Sound make = new Sound();
 
-    public Panels() {
+    Panels() {
         int count = 1;
         for (int i = 0; i < getRowLength(); i++) {
             for (int j = 0; j < getColumnLength(); j++) {

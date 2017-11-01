@@ -2,7 +2,7 @@ package sprint3;
 
 import java.util.Random;
 
-public class Shuffle {
+class Shuffle {
 
     Panels make(Panels panels) {
         for (int changes = 100000; changes > 0; changes--) {

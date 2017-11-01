@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class Sound {
+class Sound {
     
     private final File winsoundPath = new File("src\\sprint3\\winsound.wav");
     private final File movesoundPath = new File("src\\sprint3\\movesound.wav");
